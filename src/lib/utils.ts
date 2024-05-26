@@ -1,4 +1,3 @@
-import jsPDF from "jspdf";
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
 import type { Post } from ".velite";
@@ -13,27 +12,6 @@ import { slug } from "github-slugger";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-/**
- * Exports the given HTML content to a PDF file.
- * 
- * @param htmlContent - The HTML content to be exported.
- */
-export const exportToPdf = async (htmlContent: HTMLElement | null) => {
-  // Create a new jsPDF instance
-  const doc = new jsPDF();
-
-  // Add HTML content to PDF using fromHTML method
-  // This method may not support complex HTML and CSS
-  if (htmlContent) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const html = await doc.html(htmlContent);
-    console.log(html);
-    // Save or download the PDF
-    doc.save("document.pdf");
-  }
-};
-
 
 
 /**

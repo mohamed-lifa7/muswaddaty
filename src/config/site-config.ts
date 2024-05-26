@@ -1,13 +1,13 @@
 export const siteConfig = {
-  metadataBase: new URL("https://muswaddati.vercel.app"),
+  metadataBase: new URL("https://muswaddaty.vercel.app"),
   title: {
-    default: "Muswaddati",
-    template: "%s | Muswaddati",
+    default: "Muswaddaty",
+    template: "%s | Muswaddaty",
   },
 
   manifest: "/site.webmanifest",
 
-  applicationName: "Muswaddati",
+  applicationName: "Muswaddaty",
 
   creator: "Mohamed Lifa",
 
@@ -27,16 +27,16 @@ export const siteConfig = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 
   description:
-    "Muswaddati allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
+    "Muswaddaty allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
 
   openGraph: {
-    title: "Muswaddati",
+    title: "Muswaddaty",
     description:
-      "Muswaddati allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
-    siteName: "Muswaddati",
+      "Muswaddaty allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
+    siteName: "Muswaddaty",
     locale: "en_US",
-    url: new URL("https://muswaddati.vercel.app"),
-    images: ["https://muswaddati.vercel.app/og-image.png"],
+    url: new URL("https://muswaddaty.vercel.app"),
+    images: ["https://muswaddaty.vercel.app/og-image.png"],
     type: "website",
   },
 
@@ -53,15 +53,15 @@ export const siteConfig = {
   },
 
   twitter: {
-    title: "Muswaddati",
+    title: "Muswaddaty",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://muswaddati.vercel.app/twitter-og-image.png"],
+    images: ["https://muswaddaty.vercel.app/twitter-og-image.png"],
   },
 };
 
 export const links = {
-  github: "https://github.com/mohamed-lifa7/muswaddati",
+  github: "https://github.com/mohamed-lifa7/muswaddaty",
   twitter: "https://twitter.com/LifaSeddik",
   portfolio: "https://mohamed-lifa7.vercel.app",
 };

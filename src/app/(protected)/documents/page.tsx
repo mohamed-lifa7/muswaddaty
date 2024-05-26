@@ -4,18 +4,24 @@ import { currentUser } from "@/server/auth";
 import { DataTable } from "./_components/data-table";
 import { columns } from "./_components/columns";
 import CopyIdComponent from "@/components/copy-id";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Documents",
+  description: "View all your documents and collaborate with others.",
+};
+
 const DocumentsPage = async () => {
   const user = await currentUser();
   if (!user) return null;
   const docs = await getData(user.id!);
   return (
-    <main className="my-4 h-screen w-full space-y-4">
-      <div className="flex flex-col md:flex-row justify-between items-center">
+    <main className="my-4 h-screen w-full space-y-4 container">
+      <div className="flex flex-col items-center justify-between md:flex-row">
         <AddNewDoc />
         <p>
-          <span 
-          className="font-bold"
-          >Your ID is</span> : {user.id} <CopyIdComponent id={user.id!} />{" "}
+          <span className="font-bold">Your ID is</span> : {user.id}{" "}
+          <CopyIdComponent id={user.id!} />{" "}
         </p>
       </div>
 

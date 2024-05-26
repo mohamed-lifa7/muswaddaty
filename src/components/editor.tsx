@@ -1,59 +1,31 @@
 "use client";
-import {
-  type PartialBlock,
-  type BlockNoteEditor,
-  filterSuggestionItems,
-} from "@blocknote/core";
+import { type PartialBlock, type BlockNoteEditor } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
-import {
-  BlockNoteView,
-  useCreateBlockNote,
-  SuggestionMenuItem,
-  SuggestionMenuProps,
-  DefaultReactSuggestionItem,
-  getDefaultReactSlashMenuItems,
-  SuggestionMenuController,
-} from "@blocknote/react";
+import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
 import "@blocknote/react/style.css";
 import * as Y from "yjs";
 import LiveblocksProvider from "@liveblocks/yjs";
 import { useRoom, useSelf } from "@/liveblocks.config";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Avatars } from "@/components/users/Avatars";
 import { useTheme } from "next-themes";
 import { AddContributor } from "./add-contributor";
 import { useEdgeStore } from "@/lib/edgestore";
-import { Button } from "./ui/button";
 import { downloadFile } from "@/lib/utils";
-import { Sparkles } from "lucide-react";
-
-const insertMagicAi = (editor: BlockNoteEditor) => ({
-  title: "Continue with AI",
-  onItemClick: () => {
-    // Block that the text cursor is currently in.
-    const currentBlock = editor.getTextCursorPosition().block;
-
-    // New block we want to insert.
-    const magicAiBlock: PartialBlock = {
-      type: "paragraph",
-      content: [{ type: "text", text: "Hello World", styles: { bold: true } }],
-    };
-
-    // Inserting the new block after the current one.
-    editor.insertBlocks([magicAiBlock], currentBlock, "after");
-  },
-  aliases: ["ai", "magic"],
-  group: "Other",
-  icon: <Sparkles size={18} />,
-  subtext: 'Continue your idea with some extra inspiration!',
-});
-
-const getCustomSlashMenuItems = (
-  editor: BlockNoteEditor,
-): DefaultReactSuggestionItem[] => [
-  ...getDefaultReactSlashMenuItems(editor),
-  insertMagicAi(editor),
-];
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Download } from "lucide-react";
+import { Button } from "./ui/button";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function Editor({
   docId,
@@ -95,8 +67,10 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
   const userInfo = useSelf((me) => me.info);
 
   const [markdown, setMarkdown] = useState<string>("");
+  const [open, setOpen] = useState<boolean>();
   const [content, setContent] = useState<PartialBlock[]>();
   const [html, setHTML] = useState<string>("");
+  const reportTemplateRef = useRef<HTMLElement | null>(null);
   const { edgestore } = useEdgeStore();
 
   const handleDownloadMarkdown = () => {
@@ -108,11 +82,48 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
   };
 
   const handleDownloadJSON = () => {
+    console.log(editor.document);
     downloadFile(
       JSON.stringify(editor.document),
       `${docName}.json`,
       "application/json",
     );
+  };
+
+  const handleGeneratePdf = async () => {
+    const element = reportTemplateRef.current;
+    if (!element) return;
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF({
+      format: "a4",
+      unit: "px",
+      orientation: "portrait",
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pdfWidth;
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pdfHeight;
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+    }
+
+    pdf.save("document.pdf");
   };
 
   const handleUpload = async (file: File) => {
@@ -168,19 +179,38 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex flex-col items-center justify-between space-x-2 md:flex-row">
         <Avatars />
         <AddContributor docId={docId} />
         <div className="flex space-x-2">
-          <Button onClick={handleDownloadMarkdown} variant="outline">
-            Download Markdown
-          </Button>
-          <Button onClick={handleDownloadHTML} variant="outline">
-            Download HTML
-          </Button>
-          <Button onClick={handleDownloadJSON} variant="outline">
-            Get JSON
-          </Button>
+          <Drawer open={open} onOpenChange={setOpen}>
+            <DrawerTrigger asChild>
+              <Button variant="outline" className="flex items-center space-x-2">
+                <span>Export</span> <Download className="h-4 w-4" />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="text-left">
+                <DrawerTitle>Export Document</DrawerTitle>
+                <DrawerDescription>
+                  Choose a format to export your document.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="my-4 flex items-center justify-center space-x-2 md:space-x-4">
+                <Button onClick={handleDownloadMarkdown}>
+                  Download Markdown
+                </Button>
+                <Button onClick={handleDownloadHTML}>Download HTML</Button>
+                <Button onClick={handleGeneratePdf}>Download PDF</Button>
+                <Button onClick={handleDownloadJSON}>Get JSON</Button>
+              </div>
+              <DrawerFooter className="flex items-center justify-center pt-2">
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
           <input
             type="file"
             accept=".json"
@@ -193,21 +223,14 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
           </Button>
         </div>
       </div>
-      <div>
+      <div className="rounded-md border border-border shadow-md">
         <BlockNoteView
+          ref={reportTemplateRef as React.RefObject<HTMLDivElement>}
           editor={editor}
           theme={theme === "dark" ? "dark" : "light"}
           onChange={onChange}
-          slashMenu={false}
-        >
-          <SuggestionMenuController
-            triggerCharacter={"/"}
-            // Replaces the default Slash Menu items with our custom ones.
-            getItems={async (query) =>
-              filterSuggestionItems(getCustomSlashMenuItems(editor), query)
-            }
-          />
-        </BlockNoteView>
+          className="min-h-screen w-full"
+        />
       </div>
     </div>
   );

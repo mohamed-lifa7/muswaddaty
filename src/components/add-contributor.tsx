@@ -68,7 +68,7 @@ export function AddContributor({ docId }: { docId: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="space-x-2" size="lg">
+        <Button className="space-x-2">
           <span>Add Contributor</span> <Plus className="h-4 w-4" />
         </Button>
       </DialogTrigger>

@@ -1,6 +1,12 @@
-import React from "react";
+import type { Metadata } from "next";
 
-const page = () => {
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Learn about the terms of service that govern your use of Muswaddaty.",
+};
+
+const TermsPage = () => {
   return (
     <main className="mx-auto mt-6 max-w-4xl p-8">
       <h1 className="p-4 text-center text-4xl font-bold">
@@ -97,12 +103,12 @@ const page = () => {
         <h2 className="mb-4 text-2xl font-semibold">Governing Law</h2>
         <p className="mb-4">
           These Terms are governed by and construed in accordance with the laws
-          of our goverment. Any disputes arising from these Terms or your
-          use of Muswaddaty shall be resolved in the courts of our goverment.
+          of our goverment. Any disputes arising from these Terms or your use of
+          Muswaddaty shall be resolved in the courts of our goverment.
         </p>
       </section>
     </main>
   );
 };
 
-export default page;
+export default TermsPage;

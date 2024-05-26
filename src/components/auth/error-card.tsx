@@ -8,6 +8,7 @@ export const ErrorCard = () => {
       headerLabel="Oops! Something went wrong!"
       backButtonHref="/auth/login"
       backButtonLabel="Back to login"
+      headerDescription="We couldn't log you in. Please try again."
     >
       <div className="w-full flex justify-center items-center">
       <ExclamationTriangleIcon className="text-destructive" />

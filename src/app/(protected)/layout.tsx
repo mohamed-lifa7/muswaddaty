@@ -4,7 +4,7 @@ interface ProtectedLayoutProps {
 
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
-    <div className="container flex justify-center my-4">
+    <div className="flex justify-center">
       {children}
     </div>
   );

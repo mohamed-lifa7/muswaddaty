@@ -1,6 +1,12 @@
-import React from "react";
+import type { Metadata } from "next";
 
-const page = () => {
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Learn how Muswaddaty collects, uses, and protects your information.",
+};
+
+const PrivacyPage = () => {
   return (
     <main className="mx-auto mt-6 max-w-4xl p-8">
       <h1 className="text-4xl font-bold text-center p-4">Muswaddaty Privacy Policy</h1>
@@ -94,4 +100,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default PrivacyPage;
