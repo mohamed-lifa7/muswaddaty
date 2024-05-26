@@ -7,7 +7,7 @@ export const publicRoutes = [
   "/",
   "/auth/new-verification",
   "/about",
-  "blogs",
+  "/blogs",
   "/contact",
   "/terms",
   "/privacy",
