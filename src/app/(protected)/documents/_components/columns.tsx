@@ -20,10 +20,10 @@ export const columns: ColumnDef<Document>[] = [
     header: "Doc Name",
   },
   {
-    accessorKey: "updatedAt",
-    header: "Last Updated",
+    accessorKey: "createdAt",
+    header: "Created At",
     cell: ({ row }) => {
-      const date = new Date(row.getValue("updatedAt")).toUTCString();
+      const date = new Date(row.getValue("createdAt")).toUTCString();
       return (
         <time dateTime={date} className="whitespace-nowrap">
           {date}

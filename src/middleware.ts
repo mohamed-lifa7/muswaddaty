@@ -15,6 +15,7 @@ export default auth((req): void | Response | Promise<void |  Response> => {
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isBlogsRoute = nextUrl.pathname.startsWith("/blogs/")
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
@@ -30,7 +31,7 @@ export default auth((req): void | Response | Promise<void |  Response> => {
     return void 0;
   }
 
-  if (!isLoggedIn && !isPublicRoute) {
+  if (!isLoggedIn && !isPublicRoute && !isBlogsRoute) {
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;
@@ -49,5 +50,9 @@ export default auth((req): void | Response | Promise<void |  Response> => {
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: [
+    '/((?!.+\\.[\\w]+$|_next).*)', 
+    '/', 
+    '/(api|trpc)(.*)'
+],
 }

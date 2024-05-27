@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 type Props = {
   params: { doc: string };
 };
-const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
+const Editor = dynamic(() => import("@/components/editor/editor"), { ssr: false });
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const id = params.doc;

@@ -1,15 +1,25 @@
 "use client";
-import { type PartialBlock, type BlockNoteEditor } from "@blocknote/core";
+import {
+  type PartialBlock,
+  filterSuggestionItems,
+  BlockNoteSchema,
+  defaultBlockSpecs,
+} from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
-import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
-import "@blocknote/react/style.css";
+import {
+  getDefaultReactSlashMenuItems,
+  SuggestionMenuController,
+  useCreateBlockNote,
+} from "@blocknote/react";
+import { BlockNoteView } from "@blocknote/mantine";
+import "@blocknote/mantine/style.css";
 import * as Y from "yjs";
 import LiveblocksProvider from "@liveblocks/yjs";
 import { useRoom, useSelf } from "@/liveblocks.config";
 import { useEffect, useRef, useState } from "react";
 import { Avatars } from "@/components/users/Avatars";
 import { useTheme } from "next-themes";
-import { AddContributor } from "./add-contributor";
+import { AddContributor } from "../add-contributor";
 import { useEdgeStore } from "@/lib/edgestore";
 import { downloadFile } from "@/lib/utils";
 import {
@@ -23,9 +33,19 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Download } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { Alert } from "./alert/alert";
+import { insertAlert } from "./alert/insert-alert";
+
+export const schema = BlockNoteSchema.create({
+  blockSpecs: {
+    // Adds all default blocks.
+    ...defaultBlockSpecs,
+    alert: Alert,
+  },
+});
 
 export default function Editor({
   docId,
@@ -157,7 +177,8 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
     reader.readAsText(file);
   };
 
-  const editor: BlockNoteEditor = useCreateBlockNote({
+  const editor = useCreateBlockNote({
+    schema,
     collaboration: {
       provider,
       // Where to store BlockNote data in the Y.Doc:
@@ -179,10 +200,12 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
 
   return (
     <div>
-      <div className="mb-4 flex flex-col items-center justify-between space-x-2 md:flex-row">
-        <Avatars />
-        <AddContributor docId={docId} />
-        <div className="flex space-x-2">
+      <div className="my-4 flex flex-col space-y-4 max-md:container">
+        <div className="flex w-full items-center justify-between">
+          <Avatars />
+          <AddContributor docId={docId} />
+        </div>
+        <div className="flex w-full justify-end space-x-2">
           <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
               <Button variant="outline" className="flex items-center space-x-2">
@@ -230,7 +253,18 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
           theme={theme === "dark" ? "dark" : "light"}
           onChange={onChange}
           className="min-h-screen w-full"
-        />
+          slashMenu={false}
+        >
+          <SuggestionMenuController
+            triggerCharacter={"/"}
+            getItems={async (query) =>
+              filterSuggestionItems(
+                [...getDefaultReactSlashMenuItems(editor), insertAlert(editor)],
+                query,
+              )
+            }
+          />
+        </BlockNoteView>
       </div>
     </div>
   );

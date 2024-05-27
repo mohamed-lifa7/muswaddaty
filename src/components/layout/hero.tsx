@@ -12,7 +12,7 @@ const Hero = async () => {
     <section>
       <SquaresPattern />
       <div className="mx-auto max-w-screen-xl px-4 py-8 text-center lg:px-12 lg:py-16">
-        <Badge className="px-4">Brand new</Badge>
+        <Badge className="px-4 my-5">Brand new</Badge>
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-primary md:text-5xl lg:text-6xl">
           Your Ideas, Documents. Welcome to Muswaddaty
         </h1>
@@ -20,7 +20,7 @@ const Hero = async () => {
           Our online editor allows you to create, edit, and share documents
           wherever you are. No installation required.
         </p>
-        <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
+        <div className="mb-8 flex  justify-center space-x-4 lg:mb-16">
           {!user && (
             <LoginButton asChild>
               <Button size="lg">Sign in</Button>

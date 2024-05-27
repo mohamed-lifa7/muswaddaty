@@ -5,7 +5,7 @@ export const OpenSource = () => {
         <h2 className="mb-8 text-center text-4xl font-bold leading-4 text-primary">
           Proudly Open Source
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground text-center">
           Our project is proudly open source! We believe in the power of
           collaboration and transparency, which is why we&apos;ve made our code
           accessible to everyone. Whether you&apos;re a developer looking to

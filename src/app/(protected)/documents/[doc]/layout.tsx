@@ -28,8 +28,8 @@ const DocLayout = async ({
   )
     return <DocNotFound />;
   return (
-    <main className="flex flex-col w-full container py-4">
-      <Breadcrumb>
+    <main className="flex flex-col w-full md:container">
+      <Breadcrumb className="container">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink>

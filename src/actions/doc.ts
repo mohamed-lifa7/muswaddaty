@@ -43,30 +43,6 @@ export const addNewDoc = async (values: z.infer<typeof NewDocument>) => {
 };
 
 /**
- * Retrieves all documents for a given user.
- * @param userId - The ID of the user.
- * @returns A promise that resolves to an array of documents.
- */
-export const getAllDocsForUser = async (userId: string) => {
-  const docs = await db.document.findMany({
-    where: { ownerId: userId },
-  });
-  return docs;
-};
-
-/**
- * Retrieves all documents for a collaborator.
- * @param userId - The ID of the user.
- * @returns A promise that resolves to an array of documents.
- */
-export const getAllDocsForCollaborator = async (userId: string) => {
-  const docs = await db.document.findMany({
-    where: { collaborators: { has: userId } },
-  });
-  return docs;
-};
-
-/**
  * Add a new collaborator to a document.
  * @param docId - The ID of the document.
  * @param userId - The ID of the user to add.

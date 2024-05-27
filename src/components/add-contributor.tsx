@@ -3,16 +3,14 @@ import React, { useTransition } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Copy, Plus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -69,7 +67,7 @@ export function AddContributor({ docId }: { docId: string }) {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="space-x-2">
-          <span>Add Contributor</span> <Plus className="h-4 w-4" />
+          <span>Add Contributor</span> <UserPlus className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
