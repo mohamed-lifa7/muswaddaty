@@ -36,7 +36,7 @@ export const siteConfig = {
     siteName: "Muswaddaty",
     locale: "en_US",
     url: new URL("https://muswaddaty.vercel.app"),
-    images: ["https://muswaddaty.vercel.app/og-image.png"],
+    images: ["https://muswaddaty.vercel.app/og-image.jpg"],
     type: "website",
   },
 
@@ -56,7 +56,7 @@ export const siteConfig = {
     title: "Muswaddaty",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://muswaddaty.vercel.app/twitter-og-image.png"],
+    images: ["https://muswaddaty.vercel.app/og-image.jpg"],
   },
 };
 
