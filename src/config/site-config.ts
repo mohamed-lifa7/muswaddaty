@@ -1,4 +1,6 @@
-export const siteConfig = {
+import type { Metadata } from "next";
+
+export const siteConfig:Metadata = {
   metadataBase: new URL("https://muswaddaty.vercel.app"),
   title: {
     default: "Muswaddaty",
@@ -13,15 +15,19 @@ export const siteConfig = {
 
   authors: [
     {
-      name: "Mohamed Lifa",
-      url: "https://mohamed-lifa7.vercel.app",
-    },
-    {
       name: "Hafsi Ahmed",
     },
     {
       name: "Mohmoudi Assim",
     },
+    {
+      name: "Mohamed Lifa",
+      url: "https://mohamed-lifa7.vercel.app",
+    },
+    {
+      name: "Zaiz Faouzi",
+    },
+
   ],
 
   icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -36,7 +42,7 @@ export const siteConfig = {
     siteName: "Muswaddaty",
     locale: "en_US",
     url: new URL("https://muswaddaty.vercel.app"),
-    images: ["https://muswaddaty.vercel.app/og-image.jpg"],
+    images: ["/og-image.jpg"],
     type: "website",
   },
 
