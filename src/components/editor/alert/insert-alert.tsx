@@ -1,3 +1,5 @@
+/* disable-eslint */
+
 import { insertOrUpdateBlock } from "@blocknote/core";
 import type { schema } from "../editor";
 import { TriangleAlert } from "lucide-react";
