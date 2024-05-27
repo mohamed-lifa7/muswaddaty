@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-
-export const siteConfig:Metadata = {
+export const siteConfig = {
   metadataBase: new URL("https://muswaddaty.vercel.app"),
   title: {
     default: "Muswaddaty",
