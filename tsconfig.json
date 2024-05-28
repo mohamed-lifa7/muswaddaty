@@ -38,6 +38,6 @@
     "**/*.mjs",
     "**/*.js",
     ".next/types/**/*.ts"
-],
+, "next.config.mts"],
   "exclude": ["node_modules"]
 }

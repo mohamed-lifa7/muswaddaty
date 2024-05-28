@@ -1,29 +1,148 @@
-# Create T3 App
+# Muswaddaty
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+**Version**: 0.1.0
 
-## What's next? How do I make an app with this?
+Muswaddaty is an open-source, block-based, collaborative online text editor inspired by Notion. It offers a rich and intuitive user interface for creating and editing content collaboratively.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- Collaborative real-time text editing.
+- Block-based editor.
+- User authentication and management.
+- Responsive design.
+- Export content to PDF.
+- Theme support.
+- Rich text formatting.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Tech Stack
 
-## Learn More
+Muswaddaty is built with the following technologies:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Frontend:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Next.js (React framework)
+- Tailwind CSS (CSS framework)
+- Shadcn UI (UI components)
+- Framer Motion (animations)
+- React Hook Form (form management)
+- Liveblocks (real-time collaboration)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Backend:
 
-## How do I deploy this?
+- Prisma (ORM for database management)
+- NextAuth.js (authentication)
+- Node.js (runtime environment)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Utilities:
+
+- TypeScript (static typing)
+- ESLint (linting)
+- Prettier (code formatting)
+
+## Installation
+
+To get started with Muswaddaty, follow these steps:
+
+1. Clone the repository:
+
+```shell
+git clone https://github.com/mohamed-lifa7/muswaddaty.git
+
+cd muswaddaty
+```
+
+2. Install dependencies:
+
+```shell
+pnpm install
+```
+
+3. Set up environment variables:
+
+Create a `.env` file in the root directory and add your environment variables. Refer to `.env.example` for required variables.
+
+4. Push the database schema:
+
+```shell
+pnpm run db:push
+```
+
+5. Generate Prisma client:
+
+```shell
+pnpm postinstall
+```
+
+6. Start the development server:
+
+```shell
+pnpm run dev
+```
+
+## Usage
+
+Once the development server is running, you can access the application at `http://localhost:3000`. Here are some basic operations you can perform:
+
+- Create a new document: Click the "New Document" button on the homepage.
+- Edit a document: Click on an existing document to open it in the editor.
+- Collaborate: Share the document URL with others to start collaborating in real-time.
+
+## Scripts
+
+Here are some useful scripts you can use during development:
+
+- `pnpm run build`: Build the project for production.
+- `pnpm run db:push`: Push the Prisma schema to the database.
+- `pnpm run db:studio`: Open Prisma Studio for database management.
+- `pnpm run dev`: Start the development server.
+- `pnpm run lint`: Run ESLint to check for linting errors.
+- `pnpm run lint:fix`: Fix linting errors automatically.
+- `pnpm run start`: Start the production server.
+
+## Contributing
+
+We welcome contributions from the community! To contribute to Muswaddaty, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch:
+
+```shell
+git checkout -b feature/your-feature-name
+```
+
+3. Make your changes.
+4. Commit your changes:
+
+```shell
+git commit -m 'Add some feature'
+```
+
+5. Push to the branch:
+
+```shell
+git push origin feature/your-feature-name
+```
+
+6. Open a pull request.
+
+Please ensure your code adheres to the project's coding standards and passes all tests.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Contact
+
+If you have any questions or suggestions, feel free to reach out to us:
+
+Email: [mohamedlifa7@gmail.com](mailto:mohamedlifa7@gmail.com)
+
+GitHub: [Mohamed-lifa7](https://github.com/mohamed-lifa7)
+
+Or one of these :
+
+Graduation poject framer [Dr. Zaiz Fouazi](mailto:zaizfaouzi@gmail.com)
+
+Project Contributor [Ahmed Hafsi](mailto:dzahme33@gmail.com)
+
+Thank you for using Muswaddaty!

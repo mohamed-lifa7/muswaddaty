@@ -14,11 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SettingsSchema } from "@/schemas";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { settings } from "@/actions/settings";
 import {
@@ -52,7 +48,7 @@ const SettingsPage = () => {
       email: user?.email ?? undefined,
       role: user?.role ?? undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled ?? undefined,
-    }
+    },
   });
 
   const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
@@ -70,21 +66,16 @@ const SettingsPage = () => {
         })
         .catch(() => setError("Something went wrong!"));
     });
-  }
+  };
 
-  return ( 
+  return (
     <Card className="w-[600px]">
       <CardHeader>
-        <p className="text-2xl font-semibold text-center">
-          ⚙️ Settings
-        </p>
+        <p className="text-center text-2xl font-semibold">⚙️ Settings</p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form 
-            className="space-y-6" 
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <FormField
                 control={form.control}
@@ -168,7 +159,7 @@ const SettingsPage = () => {
                   <FormItem>
                     <FormLabel>Role</FormLabel>
                     <Select
-                      disabled={isPending}
+                      disabled
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -178,12 +169,8 @@ const SettingsPage = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value={UserRole.ADMIN}>
-                          Admin
-                        </SelectItem>
-                        <SelectItem value={UserRole.USER}>
-                          User
-                        </SelectItem>
+                        <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
+                        <SelectItem value={UserRole.USER}>User</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -216,17 +203,14 @@ const SettingsPage = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button
-              disabled={isPending}
-              type="submit"
-            >
+            <Button disabled={isPending} type="submit">
               Save
             </Button>
           </form>
         </Form>
       </CardContent>
     </Card>
-   );
-}
- 
+  );
+};
+
 export default SettingsPage;
