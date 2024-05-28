@@ -4,6 +4,15 @@ import { db } from "@/server/db";
 import { getUserByEmail } from "@/data/user";
 import { getVerificationTokenByToken } from "@/data/verificiation-token";
 
+/**
+ * Verifies the email address associated with a given token.
+ * @param token - The verification token.
+ * @returns An object indicating the result of the verification process.
+ *          If successful, it returns { success: "Email verified!" }.
+ *          If the token does not exist, it returns { error: "Token does not exist!" }.
+ *          If the token has expired, it returns { error: "Token has expired!" }.
+ *          If the email associated with the token does not exist, it returns { error: "Email does not exist!" }.
+ */
 export const newVerification = async (token: string) => {
   const existingToken = await getVerificationTokenByToken(token);
 

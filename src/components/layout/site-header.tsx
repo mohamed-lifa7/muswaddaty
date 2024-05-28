@@ -3,6 +3,8 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import UserMenu from "@/components/user/user-menu";
 import { currentUser } from "@/server/auth";
 import { ThemeToggle } from "../theme/theme-toggle";
+import { LoginButton } from "../auth/login-button";
+import { Button } from "../ui/button";
 
 export async function SiteHeader() {
   const user = await currentUser();
@@ -13,8 +15,13 @@ export async function SiteHeader() {
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none"></div>
-          <nav className="flex items-center">
+          <nav className="flex items-center space-x-2">
             {user && <UserMenu user={user} />}
+            {!user && (
+              <LoginButton asChild>
+                <Button>Sign in</Button>
+              </LoginButton>
+            )}
             <ThemeToggle />
           </nav>
         </div>

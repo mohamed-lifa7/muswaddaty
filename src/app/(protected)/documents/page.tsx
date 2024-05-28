@@ -19,8 +19,8 @@ const DocumentsPage = async () => {
     <main className="container my-4 h-screen w-full space-y-4">
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between">
         <AddNewDoc />
-        <p>
-          <span className="font-bold">Your ID is</span> : {user.id}{" "}
+        <p className="max-md:text-sm">
+          <span className="font-bold">Your ID</span> : {user.id}{" "}
           <CopyIdComponent id={user.id!} />{" "}
         </p>
       </div>
@@ -30,6 +30,8 @@ const DocumentsPage = async () => {
           <h2 className="text-2xl font-bold">Your Documents ({docs.length})</h2>
           <p className="text-muted-foreground">
             Here are all the documents you have created.
+            <br />
+            You can also view the documents where you are a collaborator.
           </p>
         </div>
         <DataTable columns={columns} data={docs} />

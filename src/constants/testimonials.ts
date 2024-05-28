@@ -6,7 +6,7 @@ export const testimonials = [
     avatar:
       "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F01.png?alt=media&token=ef0f4f87-5610-4410-a9e3-308395820b25",
     content:
-      "Using Muswaddaty feels like being stuck in a design maze with no exit. Help! I just wanted to make a simple banner!",
+      "As long as it's not a Google product, I'm in. Muswaddaty is a game-changer for me",
   },
   {
     id: "2",
@@ -15,16 +15,16 @@ export const testimonials = [
     avatar:
       "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F02.png?alt=media&token=887b3962-b55d-40d6-b791-64f278da811e",
     content:
-      "Is Muswaddaty a web app or a stress test for designers? Either way, my blood pressure has never been higher.",
+      "Trying to format my document in Muswaddaty is like playing an advanced level puzzle game.",
   },
   {
     id: "3",
-    name: "Alice Johnson",
-    username: "@alicejohnson",
+    name: "Facebook Commenter",
+    username: "@unknown",
     avatar:
       "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F03.png?alt=media&token=d7deb651-5cb5-4601-b90c-115b2afcf8c1",
     content:
-      "If you enjoy banging your head against the keyboard in frustration, Muswaddaty is the perfect tool for you. Otherwise, steer clear.",
+      "Notion has that in 2017 already!",
   },
   {
     id: "4",
@@ -32,52 +32,25 @@ export const testimonials = [
     username: "@bobanderson",
     avatar:
       "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F05.png?alt=media&token=c369a976-7093-4117-b8fb-0d76f65ad55a",
-    content:
-      "Muswaddaty is so buggy, I'm not sure if it's a online text editor or a beta test for a new virus.",
+    content: "Muswaddaty made me appreciate my handwritten documents.",
   },
   {
     id: "5",
     name: "Eva Wilson",
     username: "@evawilson",
     avatar:
-      "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F04.png?alt=media&token=59b1eafe-d4f2-4c50-8fca-816c52855052",
-    content: "Google Docs better than that.",
-  },
-  {
-    id: "6",
-    name: "Michael Brown",
-    username: "@michaelbrown",
-    avatar:
-      "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F03.png?alt=media&token=d7deb651-5cb5-4601-b90c-115b2afcf8c1",
+      "",
     content:
-      "Forget about job security. Muswaddaty will make you question your entire career choice in graphic design.",
-  },
-];
-
-export const features = [
-  {
-    id: "1",
-    title: "Secure and Fast Cloud File Storage",
-  },
-  {
-    id: "2",
-    title: "Access Files Anywhere, Even Offline",
-  },
-  {
-    id: "3",
-    title: "Effortless File Search and Retrieval",
-  },
-  {
-    id: "4",
-    title: "Top-Notch Security to Protect Your Data",
-  },
-  {
-    id: "5",
-    title: "Seamless Integrations with Your Favorite Apps",
+      "Thanks, Muswaddaty!",
   },
   {
     id: "6",
-    title: "Real-Time Collaborative Work for Teams",
+    name: "Google stan",
+    username: "@unknown",
+    avatar:
+      "https://firebasestorage.googleapis.com/v0/b/next-drive-62347.appspot.com/o/avatars%2F04.png?alt=media&token=d7deb651-5cb5-4601-b90c-115b2afcf8c1",
+    content:
+      "Google Docs better than that!",
   },
 ];
 

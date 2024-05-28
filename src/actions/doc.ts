@@ -101,3 +101,35 @@ export const addCollaborator = async ({
 
   return { success: "User added as a collaborator!", doc: updatedDoc };
 };
+
+// delete doc by its id
+/**
+ * Deletes a document with the specified ID.
+ * 
+ * @param docId - The ID of the document to delete.
+ * @returns An object indicating the result of the deletion operation.
+ *          - If the document does not exist, the object will have an `error` property with the value "Document does not exist!".
+ *          - If the current user is not the owner of the document, the object will have an `error` property with the value "You are not the owner of this document!".
+ *          - If the document is successfully deleted, the object will have a `success` property with the value "Document has been deleted!".
+ */
+export const deleteDoc = async (docId: string) => {
+  const doc = await db.document.findUnique({
+    where: { id: docId },
+  });
+
+  if (!doc) {
+    return { error: "Document does not exist!" };
+  }
+
+  const user = await currentUser();
+
+  if (doc.ownerId !== user?.id) {
+    return { error: "You are not the owner of this document!" };
+  }
+
+  await db.document.delete({
+    where: { id: docId },
+  });
+
+  return { success: "Document has been deleted!" };
+};

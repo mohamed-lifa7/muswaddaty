@@ -1,11 +1,14 @@
 import { db } from "@/server/db";
 
-export const getTwoFactorConfirmationByUserId = async (
-  userId: string
-) => {
+/**
+ * Retrieves the two-factor confirmation record for a given user ID.
+ * @param userId - The ID of the user.
+ * @returns The two-factor confirmation record if found, or null if not found.
+ */
+export const getTwoFactorConfirmationByUserId = async (userId: string) => {
   try {
     const twoFactorConfirmation = await db.twoFactorConfirmation.findUnique({
-      where: { userId }
+      where: { userId },
     });
 
     return twoFactorConfirmation;

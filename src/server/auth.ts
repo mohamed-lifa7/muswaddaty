@@ -8,6 +8,16 @@ import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { getAccountByUserId } from "@/data/account";
 
+/**
+ * This file contains the authentication logic for the server.
+ * It exports the necessary functions and objects for authentication,
+ * such as GET and POST handlers, authentication middleware, sign-in and sign-out functions,
+ * and an unstable_update function.
+ *
+ * @module auth
+ * @file FILEPATH: /home/mohamed/Desktop/Projects/Personal/med-docs-2/src/server/auth.ts
+ */
+
 export const {
   handlers: { GET, POST },
   auth,

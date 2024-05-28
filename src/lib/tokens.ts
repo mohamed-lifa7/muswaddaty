@@ -6,6 +6,12 @@ import { getVerificationTokenByEmail } from "@/data/verificiation-token";
 import { getPasswordResetTokenByEmail } from "@/data/password-reset-token";
 import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
 
+/**
+ * Generates a two-factor authentication token for the given email.
+ * If an existing token exists for the email, it will be deleted before generating a new one.
+ * @param email - The email for which to generate the token.
+ * @returns The generated two-factor authentication token.
+ */
 export const generateTwoFactorToken = async (email: string) => {
   const token = crypto.randomInt(100_000, 1_000_000).toString();
   const expires = new Date(new Date().getTime() + 5 * 60 * 1000);
@@ -16,7 +22,7 @@ export const generateTwoFactorToken = async (email: string) => {
     await db.twoFactorToken.delete({
       where: {
         id: existingToken.id,
-      }
+      },
     });
   }
 
@@ -25,12 +31,18 @@ export const generateTwoFactorToken = async (email: string) => {
       email,
       token,
       expires,
-    }
+    },
   });
 
   return twoFactorToken;
-}
+};
 
+/**
+ * Generates a password reset token for the given email.
+ * If an existing token exists for the email, it will be deleted before creating a new one.
+ * @param email - The email for which to generate the password reset token.
+ * @returns The created password reset token.
+ */
 export const generatePasswordResetToken = async (email: string) => {
   const token = uuidv4();
   const expires = new Date(new Date().getTime() + 3600 * 1000);
@@ -39,7 +51,7 @@ export const generatePasswordResetToken = async (email: string) => {
 
   if (existingToken) {
     await db.passwordResetToken.delete({
-      where: { id: existingToken.id }
+      where: { id: existingToken.id },
     });
   }
 
@@ -47,13 +59,19 @@ export const generatePasswordResetToken = async (email: string) => {
     data: {
       email,
       token,
-      expires
-    }
+      expires,
+    },
   });
 
   return passwordResetToken;
-}
+};
 
+/**
+ * Generates a verification token for the given email.
+ * If an existing token exists for the email, it will be deleted before creating a new one.
+ * @param email - The email for which to generate the verification token.
+ * @returns The newly generated verification token.
+ */
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
   const expires = new Date(new Date().getTime() + 3600 * 1000);
@@ -73,7 +91,7 @@ export const generateVerificationToken = async (email: string) => {
       email,
       token,
       expires,
-    }
+    },
   });
 
   return verficationToken;

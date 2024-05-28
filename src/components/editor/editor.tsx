@@ -219,7 +219,7 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
                   Choose a format to export your document.
                 </DrawerDescription>
               </DrawerHeader>
-              <div className="my-4 flex items-center justify-center space-x-2 md:space-x-4">
+              <div className="my-4 grid grid-cols-2 place-content-center gap-2 md:mx-12 md:grid-cols-4 md:gap-4">
                 <Button onClick={handleDownloadMarkdown}>
                   Download Markdown
                 </Button>
@@ -246,9 +246,11 @@ function BlockNote({ doc, provider, docId, docName }: EditorProps) {
           </Button>
         </div>
       </div>
-      <div className="rounded-md border border-border shadow-md">
+      <div
+        className="rounded-md border border-border shadow-md"
+        ref={reportTemplateRef as React.RefObject<HTMLDivElement>}
+      >
         <BlockNoteView
-          ref={reportTemplateRef as React.RefObject<HTMLDivElement>}
           editor={editor}
           theme={theme === "dark" ? "dark" : "light"}
           onChange={onChange}

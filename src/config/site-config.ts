@@ -1,3 +1,6 @@
+/**
+ * Configuration object for the site.
+ */
 export const siteConfig = {
   metadataBase: new URL("https://muswaddaty.vercel.app"),
   title: {
@@ -25,7 +28,6 @@ export const siteConfig = {
     {
       name: "Zaiz Faouzi",
     },
-
   ],
 
   icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -62,6 +64,21 @@ export const siteConfig = {
     card: "summary_large_image",
     images: ["https://muswaddaty.vercel.app/og-image.jpg"],
   },
+  keywords: [
+    "Muswaddaty",
+    "Editor",
+    "Collaboration",
+    "Real-time",
+    "Cloud-based",
+    "Workspaces",
+    "Notion",
+    "Google Docs",
+    "Microsoft Word",
+    "Team",
+    "Documents",
+    "Open Source",
+    "Block-based",
+  ],
 };
 
 export const links = {
