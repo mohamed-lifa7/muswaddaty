@@ -14,6 +14,35 @@ Muswaddaty is an open-source, block-based, collaborative online text editor insp
 - Theme support.
 - Rich text formatting.
 
+## To-do
+
+- [ ] Add support for more block types.
+- [ ] Add support for inline code blocks.
+- [ ] Add support for code blocks.
+- [ ] Implement a revision history feature.
+- [ ] Fix the Export documents in PDF format.
+- [ ] Implement support for custom permissions and access control.
+- [ ] Search functionality.
+- [ ] Notifications.
+- [ ] Mobile app.
+
+## Demo
+
+You can try out Muswaddaty online [here](https://muswaddaty.vercel.app/).
+
+## Requirements
+
+To run Muswaddaty locally, you'll need the following:
+
+- Node.js 14.x or later
+- PostgreSQL 16.x or later
+- pnpm 8.14.1 or later
+
+You'll also need to sign up for the following services:
+
+- [Liveblocks](https://liveblocks.io) (for real-time collaboration)
+- [Vercel](https://vercel.com) (for deployment)
+
 ## Tech Stack
 
 Muswaddaty is built with the following technologies:
