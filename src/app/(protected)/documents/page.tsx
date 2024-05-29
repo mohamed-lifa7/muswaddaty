@@ -1,6 +1,6 @@
 import AddNewDoc from "./_components/newDoc";
 import { currentUser } from "@/server/auth";
-import { DataTable } from "./_components/data-table";
+import { DataTable } from "../../../components/ui/data-table";
 import { columns } from "./_components/columns";
 import CopyIdComponent from "@/components/copy-id";
 import type { Metadata } from "next";

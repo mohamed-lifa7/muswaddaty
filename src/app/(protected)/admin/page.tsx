@@ -1,71 +1,105 @@
-"use client";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Files, Users } from "lucide-react";
+import { Overview } from "./_components/overview";
+import { getUsersCount } from "@/data/user";
+import {
+  getDocsCount,
+  getDocsCountForLastMonth,
+  getLatestDocs,
+} from "@/data/doc";
+import { RecentDocuments } from "./_components/recent-docs";
 
-import { admin } from "@/actions/admin";
-import { RoleGate } from "@/components/auth/role-gate";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { UserRole } from "@prisma/client";
-import { toast } from "sonner";
-
-const AdminPage = () => {
-  const onServerActionClick = () => {
-    void admin()
-      .then((data) => {
-        if (data.error) {
-          toast.error(data.error);
-        }
-
-        if (data.success) {
-          toast.success(data.success);
-        }
-      })
-  }
-  
-  const onApiRouteClick = () => {
-    void fetch("/api/admin")
-      .then((response) => {
-        if (response.ok) {
-          toast.success("Allowed API Route!");
-        } else {
-          toast.error("Forbidden API Route!");
-        }
-      })
-  }
+const AdminPage = async () => {
+  const { usersCount, docsCount, latestDocs, docsCountForLastMonth } =
+    await getData();
 
   return (
-    <Card className="w-[600px]">
-      <CardHeader>
-        <p className="text-2xl font-semibold text-center">
-          🔑 Admin
-        </p>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <RoleGate allowedRole={UserRole.ADMIN}>
-          <FormSuccess
-            message="You are allowed to see this content!"
-          />
-        </RoleGate>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
-          <p className="text-sm font-medium">
-            Admin-only API Route
-          </p>
-          <Button onClick={onApiRouteClick}>
-            Click to test
-          </Button>
+    <ScrollArea className="h-full">
+      <div className="flex-1 space-y-4 p-4 md:p-8">
+        <div className="flex items-center justify-between space-y-2 rtl:flex-row-reverse">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Hi, Welcome back 👋
+          </h2>
         </div>
-
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
-          <p className="text-sm font-medium">
-            Admin-only Server Action
-          </p>
-          <Button onClick={onServerActionClick}>
-            Click to test
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+        <Tabs defaultValue="overview" className="space-y-4">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="analytics" disabled>
+              Analytics
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Total Documets
+                  </CardTitle>
+                  <Files className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">+{docsCount}</div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Total Users
+                  </CardTitle>
+                  <Users className="h-4 w-4 text-gray-600" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">+{usersCount}</div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <Card className="col-span-4">
+                <CardHeader>
+                  <CardTitle>Overview</CardTitle>
+                </CardHeader>
+                <CardContent className="pl-2">
+                  <Overview />
+                </CardContent>
+              </Card>
+              <Card className="col-span-4 md:col-span-3">
+                <CardHeader>
+                  <CardTitle className="rtl:text-right">Recent Documents</CardTitle>
+                  <CardDescription>
+                    You made {docsCountForLastMonth} sales this month.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <RecentDocuments documents={latestDocs} />
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </ScrollArea>
   );
 };
 
 export default AdminPage;
+
+const getData = async () => {
+  const usersCount = await getUsersCount();
+  const docsCount = await getDocsCount();
+  const latestDocs = await getLatestDocs();
+  const docsCountForLastMonth = getDocsCountForLastMonth();
+  return {
+    usersCount,
+    docsCount,
+    latestDocs,
+    docsCountForLastMonth,
+  };
+};

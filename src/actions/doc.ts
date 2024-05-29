@@ -6,6 +6,7 @@ import { db } from "@/server/db";
 import { NewDocument } from "@/schemas";
 import { getUserById } from "@/data/user";
 import { currentUser } from "@/server/auth";
+import { UserRole } from "@prisma/client";
 
 /**
  * Adds a new document to the database.
@@ -102,10 +103,9 @@ export const addCollaborator = async ({
   return { success: "User added as a collaborator!", doc: updatedDoc };
 };
 
-// delete doc by its id
 /**
  * Deletes a document with the specified ID.
- * 
+ *
  * @param docId - The ID of the document to delete.
  * @returns An object indicating the result of the deletion operation.
  *          - If the document does not exist, the object will have an `error` property with the value "Document does not exist!".
@@ -132,4 +132,41 @@ export const deleteDoc = async (docId: string) => {
   });
 
   return { success: "Document has been deleted!" };
+};
+
+/**
+ * Deletes a document with the specified ID.
+ *
+ * @param docId - The ID of the document to delete.
+ * @returns An object indicating the result of the deletion operation.
+ */
+export const deleteDocWithAdmin = async (docId: string) => {
+  try {
+    const doc = await db.document.findUnique({
+      where: { id: docId },
+    });
+
+    if (!doc) {
+      return { error: "Document does not exist!" };
+    }
+
+    const user = await currentUser();
+
+    if (!user) {
+      return { error: "No current user found." };
+    }
+
+    if (user.role !== UserRole.ADMIN) {
+      return { error: "You do not have permission to delete this document!" };
+    }
+
+    await db.document.delete({
+      where: { id: docId },
+    });
+
+    return { success: "Document has been deleted!" };
+  } catch (error) {
+    console.error("Error deleting document:", error);
+    return { error: "An error occurred while deleting the document." };
+  }
 };

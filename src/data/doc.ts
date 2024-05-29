@@ -39,12 +39,12 @@ export const getAllDocsForCollaborator = async (userId: string) => {
   return docs;
 };
 
-// get all contributors for a document by its ID 
+// get all contributors for a document by its ID
 
 /**
  * Retrieves all contributors for a given document.
  * @param docId - The ID of the document.
- * @returns A promise that resolves to an array of contributors names 
+ * @returns A promise that resolves to an array of contributors names
  */
 export const getAllContributorsForDoc = async (docId: string) => {
   const doc = await db.document.findUnique({
@@ -62,4 +62,48 @@ export const getAllContributorsForDoc = async (docId: string) => {
   });
 
   return contributors;
-}
+};
+
+/**
+ * Retrieves the count of documents from the database.
+ * @returns {Promise<number>} The count of documents.
+ */
+export const getDocsCount = async () => {
+  const count = await db.document.count();
+  return count;
+};
+
+/**
+ * Retrieves the latest documents from the database.
+ * @returns {Promise<number>} The count of documents.
+ */
+export const getLatestDocs = async () => {
+  const docs = await db.document.findMany({
+    take: 5,
+    orderBy: { createdAt: "desc" },
+  });
+  return docs;
+};
+
+/**
+ * Retrieves the count of documents created in the last month.
+ * @returns {Promise<number>} The count of documents.
+ */
+export const getDocsCountForLastMonth = async () => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - 1);
+
+  const count = await db.document.count({
+    where: { createdAt: { gte: date } },
+  });
+  return count;
+};
+
+/**
+ * Retrieves all documents from the database.
+ * @returns A promise that resolves to an array of documents.
+ */
+export const getAllDocs = async () => {
+  const docs = await db.document.findMany();
+  return docs;
+};

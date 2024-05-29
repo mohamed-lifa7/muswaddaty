@@ -29,3 +29,21 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+/**
+ * Retrieves the count of users from the database.
+ * @returns {Promise<number>} The count of users.
+ */
+export const getUsersCount = async () => {
+  const count = await db.user.count();
+  return count;
+};
+
+/**
+ * Retrieves all users from the database.
+ * @returns A promise that resolves to an array of users.
+ */
+export const getAllUsers = async () => {
+  const users = await db.user.findMany();
+  return users;
+}

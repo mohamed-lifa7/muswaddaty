@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
 import type { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "Blogs",
   description:

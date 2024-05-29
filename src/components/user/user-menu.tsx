@@ -12,10 +12,18 @@ import {
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Cloud, Files, LifeBuoy, LogOut, Settings } from "lucide-react";
+import {
+  Cloud,
+  Files,
+  LifeBuoy,
+  LogOut,
+  Settings,
+  UserCog,
+} from "lucide-react";
 import { logout } from "@/actions/logout";
 import { type ExtendedUser } from "@/next-auth";
 import { FaUser } from "react-icons/fa";
+import { UserRole } from "@prisma/client";
 
 const UserMenu = ({ user }: { user: ExtendedUser }) => {
   return (
@@ -43,6 +51,17 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
               </DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
+          {user.role === UserRole.ADMIN && (
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/admin" className="flex">
+                <UserCog className="mr-2 h-4 w-4" />
+                <span>Admin Dashboard</span>
+                <DropdownMenuShortcut>
+                  <kbd>⌘A</kbd>
+                </DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/documents" className="flex">
               <Files className="mr-2 h-4 w-4" />
