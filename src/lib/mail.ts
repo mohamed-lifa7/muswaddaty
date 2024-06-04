@@ -4,9 +4,6 @@ import { VerifyMagicLinkEmail } from "@/components/auth/confirm-email";
 import { ResetPasswordMagicLinkEmail } from "@/components/auth/reset-email";
 
 const resend = new Resend(env.RESEND_API_KEY);
-
-const domain = env.NEXT_PUBLIC_APP_URL;
-
 /**
  * Sends a two-factor authentication token email to the specified email address.
  * @param email - The recipient's email address.
@@ -28,7 +25,7 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
  * @returns A promise that resolves when the email is sent successfully.
  */
 export const sendPasswordResetEmail = async (email: string, token: string) => {
-  const resetLink = `${domain}/auth/new-password?token=${token}`;
+  const resetLink = `https://muswaddaty.live/auth/new-password?token=${token}`;
 
   await resend.emails.send({
     from: "Muswaddaty <noreply@muswaddaty.live>",
@@ -44,7 +41,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
  * @param token - The verification token to include in the confirmation link.
  */
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
+  const confirmLink = `https://muswaddaty.live/auth/new-verification?token=${token}`;
 
   await resend.emails.send({
     from: "Muswaddaty <noreply@muswaddaty.live>",

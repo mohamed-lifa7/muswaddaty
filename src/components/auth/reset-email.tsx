@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import {
   Body,
   Container,
@@ -19,7 +18,6 @@ interface ResetPasswordMagicLinkEmailProps {
 export const ResetPasswordMagicLinkEmail = ({
   resetLink,
 }: ResetPasswordMagicLinkEmailProps) => {
-  const appUrl = env.NEXT_PUBLIC_APP_URL;
   return (
     <Html>
       <Head />
@@ -60,18 +58,18 @@ export const ResetPasswordMagicLinkEmail = ({
             Hint: You can set a permanent password in Settings.
           </Text>
           <Img
-            src={`${appUrl}/android-chrome-512x512.png`}
+            src={`https://muswaddaty.live/android-chrome-512x512.png`}
             width="32"
             height="32"
             alt="Muswaddaty's Logo"
           />
           <Text style={footer}>
             <Link
-              href={appUrl}
+              href="https://muswaddaty.live"
               target="_blank"
               style={{ ...link, color: "#898989" }}
             >
-              {appUrl}
+              https://muswaddaty.live
             </Link>
             , the all-in-one-workspace
             <br />

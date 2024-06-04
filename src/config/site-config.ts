@@ -1,6 +1,3 @@
-import { env } from "@/env";
-
-const appUrl = env.NEXT_PUBLIC_APP_URL;
 /**
  * Configuration object for the site.
  */
@@ -56,7 +53,7 @@ export const siteConfig = {
     title: "Muswaddaty",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: [`${appUrl}/og-image.jpg`],
+    images: [`https://muswaddaty.live/og-image.jpg`],
   },
   keywords: [
     "Muswaddaty",
