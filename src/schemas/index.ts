@@ -1,34 +1,41 @@
 import * as z from "zod";
 import { UserRole } from "@prisma/client";
 
-export const SettingsSchema = z.object({
-  name: z.optional(z.string()),
-  isTwoFactorEnabled: z.optional(z.boolean()),
-  role: z.enum([UserRole.ADMIN, UserRole.USER]),
-  email: z.optional(z.string().email()),
-  password: z.optional(z.string().min(6)),
-  newPassword: z.optional(z.string().min(6)),
-})
-  .refine((data) => {
-    if (data.password && !data.newPassword) {
-      return false;
-    }
-
-    return true;
-  }, {
-    message: "New password is required!",
-    path: ["newPassword"]
+export const SettingsSchema = z
+  .object({
+    name: z.optional(z.string()),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+    role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    email: z.optional(z.string().email()),
+    password: z.optional(z.string().min(6)),
+    newPassword: z.optional(z.string().min(6)),
   })
-  .refine((data) => {
-    if (data.newPassword && !data.password) {
-      return false;
-    }
+  .refine(
+    (data) => {
+      if (data.password && !data.newPassword) {
+        return false;
+      }
 
-    return true;
-  }, {
-    message: "Password is required!",
-    path: ["password"]
-  })
+      return true;
+    },
+    {
+      message: "New password is required!",
+      path: ["newPassword"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.newPassword && !data.password) {
+        return false;
+      }
+
+      return true;
+    },
+    {
+      message: "Password is required!",
+      path: ["password"],
+    },
+  );
 
 export const NewPasswordSchema = z.object({
   password: z.string().min(6, {
@@ -59,9 +66,15 @@ export const RegisterSchema = z.object({
   password: z.string().min(6, {
     message: "Minimum 6 characters required",
   }),
-  name: z.string().min(1, {
-    message: "Name is required",
-  }),
+  // provide a powerful way to validate the name field
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters long." })
+    .max(50, { message: "Name must be no more than 50 characters long." })
+    .regex(/^[a-zA-Z\s'-]+$/, {
+      message:
+        "Name can only contain letters, spaces, hyphens, and apostrophes.",
+    }),
 });
 
 export const NewDocument = z.object({
@@ -69,6 +82,6 @@ export const NewDocument = z.object({
     required_error: "title is required",
   }),
   ownerId: z.string({
-    required_error:"owner id is required"
+    required_error: "owner id is required",
   }),
 });
