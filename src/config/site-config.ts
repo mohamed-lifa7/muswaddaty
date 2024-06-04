@@ -5,7 +5,7 @@ const appUrl = env.NEXT_PUBLIC_APP_URL;
  * Configuration object for the site.
  */
 export const siteConfig = {
-  metadataBase: new URL(appUrl),
+  metadataBase: new URL("https://muswaddaty.live"),
   title: {
     default: "Muswaddaty",
     template: "%s | Muswaddaty",
@@ -35,7 +35,7 @@ export const siteConfig = {
       "Muswaddaty allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
     siteName: "Muswaddaty",
     locale: "en_US",
-    url: new URL(appUrl),
+    url: new URL("https://muswaddaty.live"),
     images: ["/og-image.jpg"],
     type: "website",
   },
