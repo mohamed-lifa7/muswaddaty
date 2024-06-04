@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import {
   Body,
   Container,
@@ -17,7 +18,9 @@ interface VerifyMagicLinkEmailProps {
 
 export const VerifyMagicLinkEmail = ({
   confirmLink,
-}: VerifyMagicLinkEmailProps) => (
+}: VerifyMagicLinkEmailProps) => {
+  const appUrl = env.NEXT_PUBLIC_APP_URL;
+  return (
   <Html>
     <Head />
     <Preview>Verify your email.</Preview>
@@ -57,18 +60,18 @@ export const VerifyMagicLinkEmail = ({
           Hint: You can set a permanent password in Settings.
         </Text>
         <Img
-          src={`https://muswaddaty.vercel.app/android-chrome-512x512.png`}
+          src={`${appUrl}/android-chrome-512x512.png`}
           width="32"
           height="32"
           alt="Muswaddaty's Logo"
         />
         <Text style={footer}>
           <Link
-            href="https://muswaddaty.vercel.app"
+            href={appUrl}
             target="_blank"
             style={{ ...link, color: "#898989" }}
           >
-            muswaddaty.vercel.app
+            {appUrl}
           </Link>
           , the all-in-one-workspace
           <br />
@@ -77,7 +80,8 @@ export const VerifyMagicLinkEmail = ({
       </Container>
     </Body>
   </Html>
-);
+  )
+};
 const main = {
   backgroundColor: "#ffffff",
 };

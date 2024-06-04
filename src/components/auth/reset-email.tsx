@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import {
   Body,
   Container,
@@ -17,67 +18,70 @@ interface ResetPasswordMagicLinkEmailProps {
 
 export const ResetPasswordMagicLinkEmail = ({
   resetLink,
-}: ResetPasswordMagicLinkEmailProps) => (
-  <Html>
-    <Head />
-    <Preview>Reset your password</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Heading style={h1}>Reset your password.</Heading>
-        <Link
-          href={resetLink}
-          target="_blank"
-          style={{
-            ...link,
-            display: "block",
-            marginBottom: "16px",
-          }}
-        >
-          Click here to reset your password.
-        </Link>
-        <Text
-          style={{
-            ...text,
-            color: "#ababab",
-            marginTop: "14px",
-            marginBottom: "16px",
-          }}
-        >
-          If you didn&apos;t try to reset your password, you can safely ignore
-          this email.
-        </Text>
-        <Text
-          style={{
-            ...text,
-            color: "#ababab",
-            marginTop: "12px",
-            marginBottom: "38px",
-          }}
-        >
-          Hint: You can set a permanent password in Settings.
-        </Text>
-        <Img
-          src={`https://muswaddaty.vercel.app/android-chrome-512x512.png`}
-          width="32"
-          height="32"
-          alt="Muswaddaty's Logo"
-        />
-        <Text style={footer}>
+}: ResetPasswordMagicLinkEmailProps) => {
+  const appUrl = env.NEXT_PUBLIC_APP_URL;
+  return (
+    <Html>
+      <Head />
+      <Preview>Reset your password</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Heading style={h1}>Reset your password.</Heading>
           <Link
-            href="https://muswaddaty.vercel.app"
+            href={resetLink}
             target="_blank"
-            style={{ ...link, color: "#898989" }}
+            style={{
+              ...link,
+              display: "block",
+              marginBottom: "16px",
+            }}
           >
-            muswaddaty.vercel.app
+            Click here to reset your password.
           </Link>
-          , the all-in-one-workspace
-          <br />
-          for your ideas, notes, documents and tasks.
-        </Text>
-      </Container>
-    </Body>
-  </Html>
-);
+          <Text
+            style={{
+              ...text,
+              color: "#ababab",
+              marginTop: "14px",
+              marginBottom: "16px",
+            }}
+          >
+            If you didn&apos;t try to reset your password, you can safely ignore
+            this email.
+          </Text>
+          <Text
+            style={{
+              ...text,
+              color: "#ababab",
+              marginTop: "12px",
+              marginBottom: "38px",
+            }}
+          >
+            Hint: You can set a permanent password in Settings.
+          </Text>
+          <Img
+            src={`${appUrl}/android-chrome-512x512.png`}
+            width="32"
+            height="32"
+            alt="Muswaddaty's Logo"
+          />
+          <Text style={footer}>
+            <Link
+              href={appUrl}
+              target="_blank"
+              style={{ ...link, color: "#898989" }}
+            >
+              {appUrl}
+            </Link>
+            , the all-in-one-workspace
+            <br />
+            for your ideas, notes, documents and tasks.
+          </Text>
+        </Container>
+      </Body>
+    </Html>
+  );
+};
 const main = {
   backgroundColor: "#ffffff",
 };

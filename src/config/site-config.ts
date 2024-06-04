@@ -1,8 +1,11 @@
+import { env } from "@/env";
+
+const appUrl = env.NEXT_PUBLIC_APP_URL;
 /**
  * Configuration object for the site.
  */
 export const siteConfig = {
-  metadataBase: new URL("https://muswaddaty.vercel.app"),
+  metadataBase: new URL(appUrl),
   title: {
     default: "Muswaddaty",
     template: "%s | Muswaddaty",
@@ -16,17 +19,8 @@ export const siteConfig = {
 
   authors: [
     {
-      name: "Hafsi Ahmed",
-    },
-    {
-      name: "Mohmoudi Assim",
-    },
-    {
       name: "Mohamed Lifa",
       url: "https://mohamed-lifa7.vercel.app",
-    },
-    {
-      name: "Zaiz Faouzi",
     },
   ],
 
@@ -41,7 +35,7 @@ export const siteConfig = {
       "Muswaddaty allows seamless team collaboration on documents in real-time through cloud-based workspaces.",
     siteName: "Muswaddaty",
     locale: "en_US",
-    url: new URL("https://muswaddaty.vercel.app"),
+    url: new URL(appUrl),
     images: ["/og-image.jpg"],
     type: "website",
   },
@@ -62,7 +56,7 @@ export const siteConfig = {
     title: "Muswaddaty",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://muswaddaty.vercel.app/og-image.jpg"],
+    images: [`${appUrl}/og-image.jpg`],
   },
   keywords: [
     "Muswaddaty",
