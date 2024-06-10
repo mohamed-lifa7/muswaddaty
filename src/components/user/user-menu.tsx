@@ -29,8 +29,8 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Avatar className="flex h-full w-full items-center justify-center">
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <Avatar className="flex h-[1.2rem] w-[1.2rem] items-center justify-center">
             <AvatarImage src={user.image ?? ""} />
             <AvatarFallback className="bg-primary">
               <FaUser className="text-primary-foreground" />

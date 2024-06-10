@@ -5,6 +5,9 @@ import { currentUser } from "@/server/auth";
 import { ThemeToggle } from "../theme/theme-toggle";
 import { LoginButton } from "../auth/login-button";
 import { Button } from "../ui/button";
+import Link from "next/link";
+import { links } from "@/config/site-config";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 export async function SiteHeader() {
   const user = await currentUser();
@@ -23,6 +26,11 @@ export async function SiteHeader() {
               </LoginButton>
             )}
             <ThemeToggle />
+            <Button asChild variant="ghost" size="icon" className="rounded-full">
+              <Link href={links.github}>
+                <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]"/>
+              </Link>
+            </Button>
           </nav>
         </div>
       </div>

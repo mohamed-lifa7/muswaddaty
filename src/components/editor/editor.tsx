@@ -17,7 +17,7 @@ import * as Y from "yjs";
 import LiveblocksProvider from "@liveblocks/yjs";
 import { useRoom, useSelf } from "@/liveblocks.config";
 import { useEffect, useRef, useState } from "react";
-import { Avatars } from "@/components/users/Avatars";
+import { Avatars } from "@/components/editor/Avatars";
 import { useTheme } from "next-themes";
 import { AddContributor } from "../add-contributor";
 import { useEdgeStore } from "@/lib/edgestore";
