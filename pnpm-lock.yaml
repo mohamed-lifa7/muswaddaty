@@ -5996,8 +5996,8 @@ packages:
       domelementtype: 2.3.0
     dev: false
 
-  /dompurify@2.5.0:
-    resolution: {integrity: sha512-5RXhAXSCrKTqt9pSbobT9PVRX+oPpENplTZqCiK1l0ya+ZOzwo9kqsGLbYRsAhzIiLCwKEy99XKSSrqnRTLVcw==}
+  /dompurify@2.5.7:
+    resolution: {integrity: sha512-2q4bEI+coQM8f5ez7kt2xclg1XsecaV9ASJk/54vwlfRRNQfDqJz2pzQ8t0Ix/ToBpXlVjrRIx7pFC/o8itG2Q==}
     requiresBuild: true
     dev: false
     optional: true
@@ -7801,7 +7801,7 @@ packages:
     optionalDependencies:
       canvg: 3.0.10
       core-js: 3.37.0
-      dompurify: 2.5.0
+      dompurify: 2.5.7
       html2canvas: 1.4.1
     dev: false
 
